@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
-interface Company {
+interface ICompany {
   readonly id: string;
   name: string;
   city: string;
@@ -26,7 +26,6 @@ export default function Companies({setSession}: {setSession: React.Dispatch<Reac
     queryKey: ["companies"],
     queryFn: getDataCompanies,
   });
-  console.log(data);
 
   return (
     <div className="container w-full mx-auto py-12 space-y-4">
@@ -48,14 +47,14 @@ export default function Companies({setSession}: {setSession: React.Dispatch<Reac
           </>
         ) : (
           <>
-            {data?.map((company: Company) => (
+            {data?.map((company: ICompany) => (
               <div
                 key={company.id}
                 className="flex flex-col  rounded-lg border border-gray-200 p-4 pt-6"
               >
                 <img
                   src="https://assets-a1.kompasiana.com/items/album/2021/11/08/tata-ruang-kerja-6188f7db06310e589b6d4142.jpg"
-                  className="rounded-lg"
+                  className="rounded-lg" loading="lazy"
                   alt={company.name}
                 />
                 <p className="w-full mt-4 text-sm text-center truncate">
@@ -66,7 +65,7 @@ export default function Companies({setSession}: {setSession: React.Dispatch<Reac
                 </p>
                 <hr className="w-full my-4 border-gray-200" />
                 <div className="flex justify-end">
-                  <p className="text-xs text-right text-green-500 font-semibold ">{company.city}</p>
+                  <p className="text-xs text-right text-teal-500 font-semibold ">{company.city}</p>
                 </div>
                 
               </div>
