@@ -71,14 +71,16 @@ export default function Login() {
         </form>
       </div>
     </div>
+    
   );
 }
 
 const LoginWithController = () => {
-  const { control, handleSubmit } = useForm<FormLogin>();
+  const { control, handleSubmit, formState: {errors} } = useForm<FormLogin>();
   const onLogin: SubmitHandler<FormLogin> = (data) => {
     console.log(data);
   };
+  console.log(errors);
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -127,6 +129,13 @@ const LoginWithController = () => {
               <Controller
                 control={control}
                 name="password"
+                rules={{ 
+                  required: "Password must be filled",
+                  minLength: {
+                    value: 6,
+                    message: "Password must be at least 6 characters",
+                  }
+                 }}
                 render={({ field }) => (
                   <input
                     id="password"
